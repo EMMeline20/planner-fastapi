@@ -1,2 +1,8 @@
 venv/
 __pycache__
+store/
+.env
+*.db
+*.code-workspace
+store/
+.env
