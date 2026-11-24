@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Задание водителя — ТКО-Логистика</title>
+<link rel="stylesheet" href="css/driver.css">
+<link rel="stylesheet" href="css/result.css">
+</head>
+<body>
+<div class="app">
+
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo">ТКО</div>
+      <div>
+        <div class="brand-title">ТКО-Логистика</div>
+        <div class="brand-sub">Мобильное рабочее место водителя</div>
+      </div>
+    </div>
+    <div class="topbar-right">
+      <span class="task-chip">Задание №245</span>
+      <div class="user">
+        <span class="avatar">ПС</span>
+        <div><b>Петров А.С.</b><small>Водитель</small></div>
+      </div>
+      <button class="icon-btn" id="btnExit">Выйти</button>
+    </div>
+  </header>
+
+  <div class="progress-row">
+    <span class="label" id="progressLabel">Выполнено 0 из 10</span>
+    <div class="progress-track"><i id="progressFill" style="width:0%"></i></div>
+    <span class="remain" id="remaining">Осталось 10</span>
+  </div>
+
+  <main class="main">
+    <section class="panel list-panel">
+      <div class="panel-head"><h2>Точки маршрута</h2><span class="badge" id="pointsBadge">10</span></div>
+      <div class="panel-body" id="stopList"></div>
+    </section>
+
+    <div class="right-col">
+      <section class="panel current-card">
+        <div class="current-top">
+          <span class="current-eye">Текущая точка</span>
+          <span class="badge" id="currentBadge">1 из 10</span>
+        </div>
+        <div class="current-addr" id="currentAddr">ул. Менделеева, 15</div>
+        <div class="current-sub" id="currentSub">Ленинский район · ТКО, 0,75 м³</div>
+        <div class="current-fill">
+          <span class="value" id="currentFill">82 %</span>
+          <span class="cap">заполненность</span>
+        </div>
+        <div class="fillbar"><i id="currentBar" style="width:82%"></i></div>
+        <div class="current-bottom">
+          <span class="arrival">Прибытие <b id="arrival">12:20</b></span>
+          <span class="badge" id="pointType">ТКО</span>
+        </div>
+        <div class="action-row">
+          <button class="btn-pickup" id="btnPickup">✓ ВЫВЕЗЕНО</button>
+          <button class="btn-skip" id="btnSkip" style="display:none">ПРОПУСТИТЬ</button>
+        </div>
+      </section>
+
+      <section class="panel result-panel hidden" id="resultPanel">
+        <div class="panel-head"><h2>Запись создана</h2><span class="badge">MongoDB</span><button class="result-close" id="resultClose" aria-label="Закрыть">×</button></div>
+        <div class="result-list" id="resultBody"></div>
+        <div class="result-actions">
+          <a id="resultApiLink" href="#" target="_blank" rel="noopener">Открыть GET в API</a>
+          <a href="/docs" target="_blank" rel="noopener">Swagger</a>
+        </div>
+      </section>
+
+      <section class="panel map-panel">
+        <div class="panel-head"><h2>Карта маршрута</h2><span class="badge" id="mapBadge">точка 1 из 10</span></div>
+        <div class="map-wrap"><svg preserveAspectRatio="xMidYMid slice" id="map" role="img" aria-label="Схематичная карта контейнеров и маршрута" viewBox="-150 0 1060 520"><defs><filter id="markerShadow" x="-40%" y="-40%" width="180%" height="180%"><feDropShadow dx="0" dy="2" stdDeviation="2.2" flood-color="#1b3a2d" flood-opacity="0.28"></feDropShadow></filter></defs><g id="map-base"><rect x="0" y="0" width="760" height="520" fill="#f1eee4"></rect><rect x="11" y="11" width="88" height="68" rx="3" fill="#ebe6da" stroke="#ded7c8" stroke-width="1"></rect><rect x="11" y="101" width="88" height="88" rx="3" fill="#e8e3d6" stroke="#ded7c8" stroke-width="1"></rect><rect x="11" y="211" width="88" height="88" rx="3" fill="#ebe6da" stroke="#ded7c8" stroke-width="1"></rect><rect x="11" y="321" width="88" height="88" rx="3" fill="#e8e3d6" stroke="#ded7c8" stroke-width="1"></rect><rect x="11" y="431" width="88" height="78" rx="3" fill="#ebe6da" stroke="#ded7c8" stroke-width="1"></rect><rect x="121" y="11" width="108" height="68" rx="3" fill="#e8e3d6" stroke="#ded7c8" stroke-width="1"></rect><rect x="121" y="101" width="108" height="88" rx="3" fill="#ebe6da" stroke="#ded7c8" stroke-width="1"></rect><rect x="121" y="211" width="108" height="88" rx="3" fill="#e8e3d6" stroke="#ded7c8" stroke-width="1"></rect><rect x="121" y="321" width="108" height="88" rx="10" fill="#dcecd2"></rect><circle cx="153.4" cy="369.4" r="9" fill="#c5dfb6"></circle><circle cx="187.95999999999998" cy="351.8" r="12" fill="#c5dfb6"></circle><circle cx="205.24" cy="382.6" r="7" fill="#c5dfb6"></circle><rect x="121" y="431" width="108" height="78" rx="3" fill="#e8e3d6" stroke="#ded7c8" stroke-width="1"></rect><rect x="251" y="11" width="118" height="68" rx="3" fill="#ebe6da" stroke="#ded7c8" stroke-width="1"></rect><rect x="251" y="101" width="118" height="88" rx="10" fill="#dcecd2"></rect><circle cx="286.4" cy="149.4" r="9" fill="#c5dfb6"></circle><circle cx="324.15999999999997" cy="131.8" r="12" fill="#c5dfb6"></circle><circle cx="343.04" cy="162.6" r="7" fill="#c5dfb6"></circle><rect x="251" y="211" width="118" height="88" rx="3" fill="#ebe6da" stroke="#ded7c8" stroke-width="1"></rect><rect x="251" y="321" width="118" height="88" rx="3" fill="#e8e3d6" stroke="#ded7c8" stroke-width="1"></rect><rect x="251" y="431" width="118" height="78" rx="3" fill="#ebe6da" stroke="#ded7c8" stroke-width="1"></rect><rect x="391" y="11" width="118" height="68" rx="3" fill="#e8e3d6" stroke="#ded7c8" stroke-width="1"></rect><rect x="391" y="101" width="118" height="88" rx="3" fill="#ebe6da" stroke="#ded7c8" stroke-width="1"></rect><rect x="391" y="211" width="118" height="88" rx="3" fill="#e8e3d6" stroke="#ded7c8" stroke-width="1"></rect><rect x="391" y="321" width="118" height="88" rx="3" fill="#ebe6da" stroke="#ded7c8" stroke-width="1"></rect><rect x="391" y="431" width="118" height="78" rx="3" fill="#e8e3d6" stroke="#ded7c8" stroke-width="1"></rect><rect x="531" y="11" width="108" height="68" rx="3" fill="#ebe6da" stroke="#ded7c8" stroke-width="1"></rect><rect x="531" y="101" width="108" height="88" rx="3" fill="#e8e3d6" stroke="#ded7c8" stroke-width="1"></rect><rect x="531" y="211" width="108" height="88" rx="3" fill="#ebe6da" stroke="#ded7c8" stroke-width="1"></rect><rect x="531" y="321" width="108" height="88" rx="10" fill="#dcecd2"></rect><circle cx="563.4" cy="369.4" r="9" fill="#c5dfb6"></circle><circle cx="597.96" cy="351.8" r="12" fill="#c5dfb6"></circle><circle cx="615.24" cy="382.6" r="7" fill="#c5dfb6"></circle><rect x="531" y="431" width="108" height="78" rx="3" fill="#ebe6da" stroke="#ded7c8" stroke-width="1"></rect><rect x="661" y="11" width="88" height="68" rx="3" fill="#e8e3d6" stroke="#ded7c8" stroke-width="1"></rect><rect x="661" y="101" width="88" height="88" rx="3" fill="#ebe6da" stroke="#ded7c8" stroke-width="1"></rect><rect x="661" y="211" width="88" height="88" rx="3" fill="#e8e3d6" stroke="#ded7c8" stroke-width="1"></rect><rect x="661" y="321" width="88" height="88" rx="3" fill="#ebe6da" stroke="#ded7c8" stroke-width="1"></rect><rect x="661" y="431" width="88" height="78" rx="3" fill="#e8e3d6" stroke="#ded7c8" stroke-width="1"></rect><path d="M 760 356 C 700 380, 668 432, 612 458 C 566 479, 540 502, 512 520" fill="none" stroke="#c9e4f2" stroke-width="54" stroke-linecap="round"></path><path d="M 760 356 C 700 380, 668 432, 612 458 C 566 479, 540 502, 512 520" fill="none" stroke="#b3d8ea" stroke-width="2" stroke-linecap="round" opacity="0.7"></path><line x1="110" y1="0" x2="110" y2="520" stroke="#d7d0c1" stroke-width="15" stroke-linecap="round"></line><line x1="110" y1="0" x2="110" y2="520" stroke="#ffffff" stroke-width="11" stroke-linecap="round"></line><line x1="110" y1="0" x2="110" y2="520" stroke="#efece5" stroke-width="1.5" stroke-dasharray="10 9"></line><line x1="240" y1="0" x2="240" y2="520" stroke="#d7d0c1" stroke-width="15" stroke-linecap="round"></line><line x1="240" y1="0" x2="240" y2="520" stroke="#ffffff" stroke-width="11" stroke-linecap="round"></line><line x1="240" y1="0" x2="240" y2="520" stroke="#efece5" stroke-width="1.5" stroke-dasharray="10 9"></line><line x1="380" y1="0" x2="380" y2="520" stroke="#d7d0c1" stroke-width="22" stroke-linecap="round"></line><line x1="380" y1="0" x2="380" y2="520" stroke="#ffffff" stroke-width="17" stroke-linecap="round"></line><line x1="380" y1="0" x2="380" y2="520" stroke="#efece5" stroke-width="2" stroke-dasharray="10 9"></line><line x1="520" y1="0" x2="520" y2="520" stroke="#d7d0c1" stroke-width="15" stroke-linecap="round"></line><line x1="520" y1="0" x2="520" y2="520" stroke="#ffffff" stroke-width="11" stroke-linecap="round"></line><line x1="520" y1="0" x2="520" y2="520" stroke="#efece5" stroke-width="1.5" stroke-dasharray="10 9"></line><line x1="650" y1="0" x2="650" y2="520" stroke="#d7d0c1" stroke-width="15" stroke-linecap="round"></line><line x1="650" y1="0" x2="650" y2="520" stroke="#ffffff" stroke-width="11" stroke-linecap="round"></line><line x1="650" y1="0" x2="650" y2="520" stroke="#efece5" stroke-width="1.5" stroke-dasharray="10 9"></line><line x1="0" y1="90" x2="760" y2="90" stroke="#d7d0c1" stroke-width="15" stroke-linecap="round"></line><line x1="0" y1="90" x2="760" y2="90" stroke="#ffffff" stroke-width="11" stroke-linecap="round"></line><line x1="0" y1="90" x2="760" y2="90" stroke="#efece5" stroke-width="1.5" stroke-dasharray="10 9"></line><line x1="0" y1="200" x2="760" y2="200" stroke="#d7d0c1" stroke-width="22" stroke-linecap="round"></line><line x1="0" y1="200" x2="760" y2="200" stroke="#ffffff" stroke-width="17" stroke-linecap="round"></line><line x1="0" y1="200" x2="760" y2="200" stroke="#efece5" stroke-width="2" stroke-dasharray="10 9"></line><line x1="0" y1="310" x2="760" y2="310" stroke="#d7d0c1" stroke-width="15" stroke-linecap="round"></line><line x1="0" y1="310" x2="760" y2="310" stroke="#ffffff" stroke-width="11" stroke-linecap="round"></line><line x1="0" y1="310" x2="760" y2="310" stroke="#efece5" stroke-width="1.5" stroke-dasharray="10 9"></line><line x1="0" y1="420" x2="760" y2="420" stroke="#d7d0c1" stroke-width="15" stroke-linecap="round"></line><line x1="0" y1="420" x2="760" y2="420" stroke="#ffffff" stroke-width="11" stroke-linecap="round"></line><line x1="0" y1="420" x2="760" y2="420" stroke="#efece5" stroke-width="1.5" stroke-dasharray="10 9"></line><line x1="0" y1="520" x2="760" y2="40" stroke="#d7d0c1" stroke-width="18"></line><line x1="0" y1="520" x2="760" y2="40" stroke="#ffffff" stroke-width="13"></line><text x="170" y="86" fill="#8a857a" font-size="10" font-weight="600" letter-spacing="1.2" text-anchor="middle" transform="">УЛ. ШУКИНА</text><text x="305" y="520" fill="#8a857a" font-size="10" font-weight="600" letter-spacing="1.2" text-anchor="middle" transform="rotate(-90 305 520)">ПР. ЛЕНИНА</text><text x="525" y="196" fill="#8a857a" font-size="10" font-weight="600" letter-spacing="1.2" text-anchor="middle" transform="">УЛ. ГАГАРИНА</text><text x="60" y="306" fill="#8a857a" font-size="10" font-weight="600" letter-spacing="1.2" text-anchor="middle" transform="">УЛ. СОВЕТСКАЯ</text><text x="640" y="470" fill="#8a857a" font-size="11" font-weight="600" letter-spacing="1.2" text-anchor="middle" transform="rotate(-24 640 470)">Р. БЕЛАЯ</text><text x="210" y="305" fill="#8a857a" font-size="9" font-weight="600" letter-spacing="1.2" text-anchor="middle" transform="">ПАРК</text></g><g id="map-route"><path d="M 80 450 L 200 430 L 120 260 L 180 150 L 300 220 L 420 160 L 680 250 L 610 180 L 560 390 L 430 450 L 360 380 L 80 450" fill="none" stroke="#ffffff" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" opacity="0.95"></path><path d="M 80 450 L 200 430 L 120 260 L 180 150 L 300 220 L 420 160 L 680 250 L 610 180 L 560 390 L 430 450 L 360 380 L 80 450" fill="none" stroke="#1565c0" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"></path><rect x="71" y="441" width="18" height="18" rx="3" fill="#37474f" stroke="#fff" stroke-width="2"></rect><text x="80" y="478" text-anchor="middle" font-size="10" font-weight="700" fill="#37474f">ДЕПО</text></g><g id="map-markers"><g class="marker" data-id="c01" transform="translate(180 150)" tabindex="0" role="button" opacity="1" pointer-events="all" aria-label="ул. Шукина, 12, заполненность 92%"><circle r="14" fill="#d32f2f" stroke="#ffffff" stroke-width="3" filter="url(#markerShadow)"></circle><text x="0" y="4" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff" pointer-events="none">3</text><title>ул. Шукина, 12 — 92%</title></g><g class="marker" data-id="c02" transform="translate(300 220)" tabindex="0" role="button" opacity="1" pointer-events="all" aria-label="пр. Ленина, 45, заполненность 87%"><circle r="14" fill="#d32f2f" stroke="#ffffff" stroke-width="3" filter="url(#markerShadow)"></circle><text x="0" y="4" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff" pointer-events="none">4</text><title>пр. Ленина, 45 — 87%</title></g><g class="marker" data-id="c03" transform="translate(420 160)" tabindex="0" role="button" opacity="1" pointer-events="all" aria-label="ул. Гагарина, 3, заполненность 85%"><circle r="14" fill="#d32f2f" stroke="#ffffff" stroke-width="3" filter="url(#markerShadow)"></circle><text x="0" y="4" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff" pointer-events="none">5</text><title>ул. Гагарина, 3 — 85%</title></g><g class="marker dimmed" data-id="c04" transform="translate(520 260)" tabindex="-1" role="button" opacity="0.35" pointer-events="none" aria-label="ул. Кирова, 20, заполненность 64%"><circle r="13" fill="#ef6c00" stroke="#ffffff" stroke-width="3" filter="url(#markerShadow)"></circle><text x="0" y="4" text-anchor="middle" font-size="9" font-weight="700" fill="#ffffff" pointer-events="none">64</text><title>ул. Кирова, 20 — 64%</title></g><g class="marker" data-id="c05" transform="translate(610 180)" tabindex="0" role="button" opacity="1" pointer-events="all" aria-label="ул. Мира, 8, заполненность 88%"><circle r="14" fill="#d32f2f" stroke="#ffffff" stroke-width="3" filter="url(#markerShadow)"></circle><text x="0" y="4" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff" pointer-events="none">7</text><title>ул. Мира, 8 — 88%</title></g><g class="marker dimmed" data-id="c06" transform="translate(240 330)" tabindex="-1" role="button" opacity="0.35" pointer-events="none" aria-label="ул. Советская, 14, заполненность 78%"><circle r="13" fill="#ef6c00" stroke="#ffffff" stroke-width="3" filter="url(#markerShadow)"></circle><text x="0" y="4" text-anchor="middle" font-size="9" font-weight="700" fill="#ffffff" pointer-events="none">78</text><title>ул. Советская, 14 — 78%</title></g><g class="marker" data-id="c07" transform="translate(360 380)" tabindex="0" role="button" opacity="1" pointer-events="all" aria-label="ул. Горького, 30, заполненность 91%"><circle r="14" fill="#d32f2f" stroke="#ffffff" stroke-width="3" filter="url(#markerShadow)"></circle><text x="0" y="4" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff" pointer-events="none">10</text><title>ул. Горького, 30 — 91%</title></g><g class="marker dimmed" data-id="c08" transform="translate(470 330)" tabindex="-1" role="button" opacity="0.35" pointer-events="none" aria-label="ул. Достоевского, 5, заполненность 56%"><circle r="13" fill="#2e7d32" stroke="#ffffff" stroke-width="3" filter="url(#markerShadow)"></circle><text x="0" y="4" text-anchor="middle" font-size="9" font-weight="700" fill="#ffffff" pointer-events="none">56</text><title>ул. Достоевского, 5 — 56%</title></g><g class="marker" data-id="c09" transform="translate(560 390)" tabindex="0" role="button" opacity="1" pointer-events="all" aria-label="ул. Цюрупы, 17, заполненность 83%"><circle r="14" fill="#ef6c00" stroke="#ffffff" stroke-width="3" filter="url(#markerShadow)"></circle><text x="0" y="4" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff" pointer-events="none">8</text><title>ул. Цюрупы, 17 — 83%</title></g><g class="marker dimmed" data-id="c10" transform="translate(650 320)" tabindex="-1" role="button" opacity="0.35" pointer-events="none" aria-label="ул. Комсомольская, 42, заполненность 47%"><circle r="13" fill="#2e7d32" stroke="#ffffff" stroke-width="3" filter="url(#markerShadow)"></circle><text x="0" y="4" text-anchor="middle" font-size="9" font-weight="700" fill="#ffffff" pointer-events="none">47</text><title>ул. Комсомольская, 42 — 47%</title></g><g class="marker" data-id="c11" transform="translate(120 260)" tabindex="0" role="button" opacity="1" pointer-events="all" aria-label="ул. Аксакова, 7, заполненность 89%"><circle r="14" fill="#d32f2f" stroke="#ffffff" stroke-width="3" filter="url(#markerShadow)"></circle><text x="0" y="4" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff" pointer-events="none">2</text><title>ул. Аксакова, 7 — 89%</title></g><g class="marker" data-id="c12" transform="translate(680 250)" tabindex="0" role="button" opacity="1" pointer-events="all" aria-label="ул. Заки Валиди, 32, заполненность 86%"><circle r="14" fill="#d32f2f" stroke="#ffffff" stroke-width="3" filter="url(#markerShadow)"></circle><text x="0" y="4" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff" pointer-events="none">6</text><title>ул. Заки Валиди, 32 — 86%</title></g><g class="marker" data-id="c13" transform="translate(430 450)" tabindex="0" role="button" opacity="1" pointer-events="all" aria-label="ул. Чернышевского, 88, заполненность 90%"><circle r="14" fill="#d32f2f" stroke="#ffffff" stroke-width="3" filter="url(#markerShadow)"></circle><text x="0" y="4" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff" pointer-events="none">9</text><title>ул. Чернышевского, 88 — 90%</title></g><g class="marker selected" data-id="c14" transform="translate(200 430)" tabindex="0" role="button" opacity="1" pointer-events="all" aria-label="ул. Менделеева, 15, заполненность 82%"><circle r="21" fill="none" stroke="#1565c0" stroke-width="2" stroke-dasharray="5 4"></circle><circle r="14" fill="#ef6c00" stroke="#ffffff" stroke-width="3" filter="url(#markerShadow)"></circle><text x="0" y="4" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff" pointer-events="none">1</text><title>ул. Менделеева, 15 — 82%</title></g></g><g id="currentPulse"><circle id="pulseCircle" cx="180" cy="150" r="23" fill="none" stroke="#1565c0" stroke-width="3" stroke-dasharray="6 4"/></g></svg>
+
+          </div>
+      </section>
+    </div>
+  </main>
+
+  <div class="bottom">
+    <section class="panel journal-panel">
+      <div class="panel-head"><h2>Журнал операций</h2><span class="badge">сегодня</span></div>
+      <div class="journal-list" id="journalList"></div>
+    </section>
+
+    <section class="panel net-panel">
+      <div class="panel-head"><h2>Связь и задание</h2></div>
+      <div class="net-list">
+        <div class="net-row"><span>Сеть</span><button class="net-toggle" id="netToggle">Онлайн</button></div>
+        <div class="net-row"><span>Синхронизация</span><b id="syncState">12:50</b></div>
+        <div class="net-row"><span>Мусоровоз</span><b>№1 · 12 м³</b></div>
+        <div class="net-row"><span>Задание</span><b>№245</b></div>
+      </div>
+    </section>
+  </div>
+
+  <footer class="statusbar">
+    <div class="status-msg"><span class="dot"></span><span id="statusText">Задание №245 · точка 1 из 10 · ожидает подтверждения</span></div>
+    <div class="status-meta" id="statusMeta">Обновлено</div>
+  </footer>
+</div>
+
+<div class="modal hidden" id="skipModal">
+  <div class="modal-card">
+    <div class="modal-head">
+      <h3>Пропустить точку</h3>
+      <button class="modal-close" id="skipClose" aria-label="Закрыть">×</button>
+    </div>
+    <div class="modal-body">
+      <p class="modal-text">Укажите причину, по которой контейнер не вывезен. Диспетчер увидит статус «Пропущено» и причину.</p>
+      <label class="modal-label" for="skipReason">Причина</label>
+      <select id="skipReason">
+        <option>Подъезд заблокирован</option>
+        <option>Контейнер отсутствует</option>
+        <option>Контейнер переполнен, нужна спецтехника</option>
+        <option>Другая причина</option>
+      </select>
+      <div class="modal-actions">
+        <button class="btn-cancel" id="skipCancel">Отмена</button>
+        <button class="btn-danger" id="skipConfirm">Пропустить</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast-wrap" id="toastWrap"></div>
+
+<script>
+  (function () {
+    try {
+      var c = JSON.parse(sessionStorage.getItem('tko_session') || 'null');
+      if (!c || c.role !== 'driver') {
+        var id = 'sess_' + Date.now().toString(36) + '_' + Math.random().toString(36).slice(2, 8);
+        sessionStorage.setItem('tko_session', JSON.stringify({
+          sessionId: id,
+          subject: 'petrov',
+          condition: 'success',
+          scenario: 'UC-3',
+          role: 'driver',
+          mode: 'test',
+          startedAt: new Date().toISOString()
+        }));
+      }
+    } catch (e) { /* ignore */ }
+  })();
+</script>
+<script src="js/logger.js"></script>
+<script src="js/api.js"></script>
+<script src="js/driver.js"></script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+.venv/
+.data/
+.env
+__pycache__/
+*.pyc
+logs/events.jsonl
+.pytest_cache/
+pytest-of-*/
+

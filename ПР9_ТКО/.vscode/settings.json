@@ -1,0 +1,22 @@
+{
+  "python.defaultInterpreterPath": "${workspaceFolder}\\.venv\\Scripts\\python.exe",
+  "python.terminal.activateEnvironment": false,
+  "files.exclude": {
+    "**/.venv": true,
+    "**/.data": true,
+    "**/__pycache__": true,
+    "**/.pytest_cache": true,
+    "**/pytest-of-*": true,
+    "**/*.pyc": true
+  },
+  "search.exclude": {
+    "**/.venv": true,
+    "**/.data": true,
+    "**/__pycache__": true,
+    "**/.pytest_cache": true,
+    "**/pytest-of-*": true
+  },
+  "files.associations": {
+    "*.cmd": "bat"
+  }
+}

@@ -1,0 +1,79 @@
+/* Карточка результата: показывает ровно те поля, которые вернул API и сохранил MongoDB. */
+.result-panel.hidden {
+  display: none;
+}
+
+/* Фиксированная карточка поверх карты: не сжимает карту и всегда видна после клика. */
+.result-panel {
+  position: fixed;
+  right: 18px;
+  bottom: 46px;
+  width: min(440px, calc(100vw - 36px));
+  max-height: calc(100vh - 120px);
+  z-index: 50;
+  box-shadow: 0 16px 48px rgba(16, 44, 32, 0.24);
+}
+
+.result-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 4px 14px 10px;
+  overflow: auto;
+}
+
+.result-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 14px;
+  padding: 4px 0;
+  border-bottom: 1px dashed #d7e2d9;
+  font-size: 13px;
+  line-height: 1.35;
+}
+
+.result-row span:first-child {
+  color: #5f7266;
+  flex: 0 0 auto;
+}
+
+.result-row b {
+  text-align: right;
+  color: #1c2b22;
+  font-weight: 600;
+  word-break: break-word;
+}
+
+.result-actions {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  padding: 0 14px 12px;
+}
+
+.result-actions a {
+  font-size: 13px;
+  color: #1b5e20;
+  text-decoration: none;
+  border-bottom: 1px solid #9ccc9f;
+}
+
+.result-actions a:hover {
+  border-bottom-color: #1b5e20;
+}
+
+.result-close {
+  margin-left: auto;
+  border: 0;
+  background: transparent;
+  color: #5f7266;
+  font-size: 20px;
+  line-height: 1;
+  padding: 0 0 0 10px;
+  cursor: pointer;
+}
+
+.result-close:hover {
+  color: #1b5e20;
+}
