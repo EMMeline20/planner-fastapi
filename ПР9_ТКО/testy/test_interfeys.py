@@ -198,7 +198,7 @@ def test_ui_shows_error_on_422(live_server):
             assert "Некорректные данные" in status or "Некорректные данные" in toast
 
             page.screenshot(
-                path=str(ROOT / "docs" / "ui_error.png"), full_page=True
+                path=str(ROOT / ".data" / "ui_error.png"), full_page=True
             )
         finally:
             browser.close()
